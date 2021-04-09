@@ -1,16 +1,21 @@
 
 import ReactDOM from "react-dom";
 import React from "react";
+import 'antd/dist/antd.css'; 
 
-class HelloMessage extends React.Component {
-  render() {
-    return <div>Hello {this.props.name}</div>;
-  }
+import Board from './Board'
+
+
+
+function App(){
+  return <>
+   <Board/>
+  </>
 }
 
-const app = document.createElement('div')
 
+
+const app = document.createElement('div')
 document.querySelector('body').appendChild(app)
 
-
-ReactDOM.render(<HelloMessage name="Jane" />, app);
+ReactDOM.render(<App />, app);
