@@ -54,3 +54,35 @@
     border-radius: 2px;
     font-size: 12px;
 }
+
+.distance{
+    position: absolute;
+    background-color: rgb(254, 64, 102);
+}
+.distance-vertical{
+    width: 1px;
+
+}
+.distance-horizontal{
+    height: 1px;
+}
+
+.distance span{
+    display: inline-block;
+    font-size: 12px;
+    background-color: rgb(254, 64, 102);
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 18px;
+    padding: 0 3px;
+    border-radius: 2px;
+    position: absolute;
+}
+
+.distance-vertical span{    
+    top: 50%;
+    transform: translate(calc(-100% - 3px), -50%);
+}
+.distance-horizontal span{
+    left: 50%;
+    transform: translate(-50%, calc(-100% - 3px)); 
+}
