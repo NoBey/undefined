@@ -100,7 +100,7 @@ function Detail(props) {
         <div
           className={"detail-box-wrap"}
           onMouseMove={boxmousemove}
-          // onMouseOut={boxmouseout}
+          onMouseOut={boxmouseout}
           style={boxStyle}
         >
           {/* 选择的 layer */}
