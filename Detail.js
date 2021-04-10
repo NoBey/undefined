@@ -83,6 +83,16 @@ function Detail(props) {
       }
     }
   };
+
+  const boxmouseout = () => {
+    setMoveLayer(null)
+    setDistances({
+      top: null,
+      right: null,
+      bottom: null,
+      left: null,
+    })
+  }
   console.log({ moveLayer, distances });
   return (
     <>
@@ -90,6 +100,7 @@ function Detail(props) {
         <div
           className={"detail-box-wrap"}
           onMouseMove={boxmousemove}
+          // onMouseOut={boxmouseout}
           style={boxStyle}
         >
           {/* 选择的 layer */}
@@ -135,7 +146,7 @@ function Detail(props) {
               style={distances.top}
               className={"top-distance distance distance-vertical"}
             >
-              <span>{distances.top.height * zoom}px</span>
+              <span>{ parseInt(distances.top.height / zoom)}px</span>
             </div>
           )}
           {distances.right && (
@@ -143,7 +154,7 @@ function Detail(props) {
               style={distances.right}
               className={"right-distance distance distance-horizontal"}
             >
-              <span>{distances.right.width * zoom}px</span>
+              <span>{parseInt(distances.right.width / zoom)}px</span>
             </div>
           )}
           {distances.bottom && (
@@ -151,7 +162,7 @@ function Detail(props) {
               style={distances.bottom}
               className={"bottom-distance distance distance-vertical"}
             >
-              <span>{distances.bottom.height * zoom}px</span>
+              <span>{parseInt(distances.bottom.height / zoom)}px</span>
             </div>
           )}
           {distances.left && (
@@ -159,9 +170,19 @@ function Detail(props) {
               style={distances.left}
               className={"left-distance distance distance-horizontal"}
             >
-              <span>{distances.left.width * zoom}px</span>
+              <span>{parseInt(distances.left.width / zoom)}px</span>
             </div>
           )}
+
+          {/* 标尺线 */}
+
+          {moveLayer && moveLayer.rect && <> 
+            <div className="top ruler ruler-horizontal" style={{top: moveLayer.rect.y * zoom}}></div>
+            <div className="left ruler ruler-vertical" style={{left: moveLayer.rect.x * zoom}}></div>
+            <div className="right ruler ruler-vertical" style={{left: (moveLayer.rect.x + moveLayer.rect.width) * zoom}}></div>
+            <div className="bottom ruler ruler-horizontal" style={{top: (moveLayer.rect.y + moveLayer.rect.height) * zoom}}></div>
+          </>}
+
         </div>
       </div>
     </>

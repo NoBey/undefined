@@ -16,7 +16,6 @@
 
 .detail-layer{
     position: absolute;
-    /* border: 1px solid red; */
 }
 
 .detail-layer:hover{
@@ -85,4 +84,20 @@
 .distance-horizontal span{
     left: 50%;
     transform: translate(-50%, calc(-100% - 3px)); 
+}
+
+.ruler{
+    position: absolute;
+    border: 1px dotted blue;
+    left: 0;
+    top:0;
+}
+
+.ruler-vertical{
+    width: 0px;
+    height: 100%;
+}
+.ruler-horizontal{
+    height: 0px;
+    width: 100%;
 }
