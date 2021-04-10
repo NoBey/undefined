@@ -1,0 +1,27 @@
+.detail-warp{
+    height: 100%;
+    width: 100%;
+    background: #f0f2f5 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.detail-box-wrap{
+    position: absolute;
+    box-shadow: 0 2px 4px 1px rgb(40 120 255 / 8%), 0 0 6px 1px rgb(0 0 0 / 8%);
+}
+.detail-box-wrap img{
+    width: 100%;
+}
+
+.detail-layer{
+    position: absolute;
+    /* border: 1px solid red; */
+}
+.detail-layer-selected{
+    position: absolute;
+    border: 1px solid red;
+}
+.detail-layer:hover{
+    border: 1px solid blue;
+}

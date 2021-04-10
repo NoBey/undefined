@@ -36,9 +36,17 @@ html,body{
     text-indent: 20px;
     line-height: 40px;
 }
+.tree-item-active{
+    text-indent: 20px;
+    line-height: 40px;
+    background: #e6f7ff;
+}
+
 
 .free-board{
     position: relative;
+    width: 100%;
+    height: 100%;
 }
 
 .board-wrap{
@@ -46,9 +54,20 @@ html,body{
     box-shadow:#eee 0px 0px 5px;
     background: #fff;
     position: absolute;
-    
 }
 
+
+.board-wrap-active{
+    outline: rgb(62, 147, 255) solid 2px;
+    box-shadow:#eee 0px 0px 5px;
+    background: #fff;
+    position: absolute;
+}
+
+
 .board-wrap img{
+    width: 100%;
+}
+.board-wrap-active img{
     width: 100%;
 }
