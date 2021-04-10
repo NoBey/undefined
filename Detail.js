@@ -6,7 +6,6 @@ import { data } from "./data";
 
 import "./detail.css";
 
-
 function Detail(props) {
   let { params } = useRouteMatch("/detail/:id");
   const info = data.artboards.find(({ objectID }) => objectID === params.id);
@@ -49,24 +48,42 @@ function Detail(props) {
     // window.innerWidth
   }, []);
 
-  const [selectLayer, setSelectLayer] = useState(null)
-
-
+  const [selectLayer, setSelectLayer] = useState(null);
+  console.log(selectLayer)
   return (
     <>
       <div className={"detail-warp"} ref={wrapRef}>
         <div className={"detail-box-wrap"} style={boxStyle}>
+          {selectLayer && (
+            <div
+              className={"detail-layer-selected"}
+              style={{
+                width: selectLayer.rect.width * zoom,
+                height: selectLayer.rect.height * zoom,
+                top: selectLayer.rect.y * zoom,
+                left: selectLayer.rect.x * zoom,
+              }}
+            >
+                <div className="layer-rect-width-value">{selectLayer.rect.width}px</div>
+                <div className="layer-rect-height-value">{selectLayer.rect.height}px</div>
+            </div>
+          )}
 
           {layers.map(({ rect, ...layer }) => (
             <div
               key={layer.objectID}
-              style={{ width: rect.width * zoom, height: rect.height * zoom, top: rect.y * zoom, left: rect.x * zoom}}
-              className={`detail-layer${selectLayer && selectLayer.objectID === layer.objectID ? '-selected' : ''}`}
-              onClick={() => setSelectLayer(layer)}
-            ></div>
+              style={{
+                width: rect.width * zoom,
+                height: rect.height * zoom,
+                top: rect.y * zoom,
+                left: rect.x * zoom,
+              }}
+              className={`detail-layer`}
+              onClick={() => setSelectLayer({...layer, rect})}
+            />
           ))}
 
-          <img draggable="false" src={"/" + info.imagePath}></img>
+          <img draggable="false" src={"/" + info.imagePath} />
         </div>
       </div>
     </>
