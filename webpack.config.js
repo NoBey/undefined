@@ -1,5 +1,10 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+process.on('unhandledRejection', e => {
+  console.error(e);
+});
+
 module.exports = {
   mode: "development",
   entry: "./index.js",

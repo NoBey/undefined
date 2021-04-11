@@ -18,6 +18,7 @@ data.artboards.forEach((b, i) => {
   artboards.push(b);
 });
 function FreeBoard(props) {
+  let history = useHistory();
   const { activeBoardId, setActiveBoardId } = props;
   let [scale, setScale] = useState(1);
   let [posX, setPosX] = useState(0);
@@ -78,6 +79,10 @@ function FreeBoard(props) {
               // setPosY(d.left)
               // setScale(1)
             }}
+          
+            onDoubleClick={() => {
+              history.push("/detail/" + d.objectID);
+            }}
           >
             <img draggable="false" src={"/" + d.imagePath} />
           </div>
@@ -109,6 +114,8 @@ function BoardPage(props) {
               key={d.objectID}
               onClick={() => {
                 setActiveBoardId(d.objectID);
+              }}
+              onDoubleClick={() => {
                 history.push("/detail/" + d.objectID);
               }}
               className={`tree-item${

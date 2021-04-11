@@ -6,6 +6,55 @@ import { data } from "./data";
 
 import "./detail.css";
 
+// let size = [
+//   '<div class="item" data-label="' + localize('Size') + ':">',
+//   '<label data-label="' + localize('Width') + '"><input id="size-width" type="text" value="' + unitSize(layerData.rect.width) + '" readonly="readonly"></label>',
+//   '<label data-label="' + localize('Height') + '"><input id="size-height" type="text" value="' + unitSize(layerData.rect.height) + '" readonly="readonly"></label>',
+//   '</div>'
+// ].join('');
+// let opacity = (typeof layerData.opacity == 'number') ? [
+//   '<div class="item" data-label="' + localize('Opacity') + ':">',
+//   '<label><input id="opacity" type="text" value="' + Math.round(layerData.opacity * 10000) / 100 + '%" readonly="readonly"></label>',
+//   '<label></label>',
+//   '</div>'
+// ].join('') : '';
+// let radius = (layerData.radius) ? [
+//   '<div class="item" data-label="' + localize('Radius') + ':">',
+//   '<label><input id="radius" type="text" value="' + unitSize(layerData.radius[0]) + '" readonly="readonly"></label>',
+//   '<label></label>',
+//   '</div>'
+// ].join('') : '';
+// let styleName = (layerData.styleName) ? [
+//   '<div class="item" data-label="' + localize('Style') + ':">',
+//   '<label><input id="styleName" type="text" value="' + layerData.styleName + '" readonly="readonly"></label>',
+//   '</div>'
+// ].join('') : '';
+
+function InspectorItem({ title, values = [] }) {
+  return (
+    <div class="item">
+      <div className="item-title">{title}</div>
+      {values.map((value) => (
+        <div className="item-value"> 
+          <input type="text" value={value} readonly="readonly" />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function InspectorProperties({layer}) {
+
+  let items = []
+  // if()
+  return (
+    <section className={'inspector'}>
+      <InspectorItem title={'位置'} values={[layer.rect.x, layer.rect.y]} />
+
+    </section>
+  );
+}
+
 function Inspector({ layer }) {
   const [show, setShow] = useState(false);
   useEffect(() => {
@@ -22,9 +71,9 @@ function Inspector({ layer }) {
       visible={show}
       mask={false}
     >
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
+      {layer && <>
+      <InspectorProperties layer={layer} />
+      </>}
     </Drawer>
   );
 }
@@ -138,10 +187,10 @@ function Detail(props) {
               }}
             >
               <div className="layer-rect-width-value">
-                {selectLayer.rect.width}px
+                {parseInt(selectLayer.rect.width)}px
               </div>
               <div className="layer-rect-height-value">
-                {selectLayer.rect.height}px
+                {parseInt(selectLayer.rect.height)}px
               </div>
             </div>
           )}
