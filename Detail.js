@@ -2,54 +2,50 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { useRouteMatch } from "react-router-dom";
 import { Drawer } from "antd";
-import { data } from "./data";
+import { data } from "./data"; 
 
 import "./detail.css";
 
-// let size = [
-//   '<div class="item" data-label="' + localize('Size') + ':">',
-//   '<label data-label="' + localize('Width') + '"><input id="size-width" type="text" value="' + unitSize(layerData.rect.width) + '" readonly="readonly"></label>',
-//   '<label data-label="' + localize('Height') + '"><input id="size-height" type="text" value="' + unitSize(layerData.rect.height) + '" readonly="readonly"></label>',
-//   '</div>'
-// ].join('');
-// let opacity = (typeof layerData.opacity == 'number') ? [
-//   '<div class="item" data-label="' + localize('Opacity') + ':">',
-//   '<label><input id="opacity" type="text" value="' + Math.round(layerData.opacity * 10000) / 100 + '%" readonly="readonly"></label>',
-//   '<label></label>',
-//   '</div>'
-// ].join('') : '';
-// let radius = (layerData.radius) ? [
-//   '<div class="item" data-label="' + localize('Radius') + ':">',
-//   '<label><input id="radius" type="text" value="' + unitSize(layerData.radius[0]) + '" readonly="readonly"></label>',
-//   '<label></label>',
-//   '</div>'
-// ].join('') : '';
-// let styleName = (layerData.styleName) ? [
-//   '<div class="item" data-label="' + localize('Style') + ':">',
-//   '<label><input id="styleName" type="text" value="' + layerData.styleName + '" readonly="readonly"></label>',
-//   '</div>'
-// ].join('') : '';
+
+
 
 function InspectorItem({ title, values = [] }) {
   return (
     <div class="item">
       <div className="item-title">{title}</div>
       {values.map((value) => (
-        <div className="item-value"> 
-          <input type="text" value={value} readonly="readonly" />
-        </div>
+        <div className="item-value">{value}</div>
       ))}
     </div>
   );
 }
 
-function InspectorProperties({layer}) {
-
-  let items = []
+function InspectorProperties({ layer }) {
+  let items = [];
   // if()
   return (
-    <section className={'inspector'}>
-      <InspectorItem title={'位置'} values={[layer.rect.x, layer.rect.y]} />
+    <section className={"inspector"}>
+      <InspectorItem
+        title={"位置"}
+        values={[parseInt(layer.rect.x) + "px", parseInt(layer.rect.y) + "px"]}
+      />
+      <InspectorItem
+        title={"大小"}
+        values={[
+          parseInt(layer.rect.width) + "px",
+          parseInt(layer.rect.height) + "px",
+        ]}
+      />
+      {typeof layer.opacity == "number" && (
+        <InspectorItem
+          title={"不透明度"}
+          values={[+Math.round(layer.opacity * 10000) / 100 + "%"]}
+        />
+      )}
+      {layer.radius && <InspectorItem
+          title={"圆角"}
+          values={[parseInt(layer.radius[0])+'px']}
+        />}
 
     </section>
   );
@@ -70,10 +66,13 @@ function Inspector({ layer }) {
       onClose={onClose}
       visible={show}
       mask={false}
+      width={300}
     >
-      {layer && <>
-      <InspectorProperties layer={layer} />
-      </>}
+      {layer && (
+        <>
+          <InspectorProperties layer={layer} />
+        </>
+      )}
     </Drawer>
   );
 }

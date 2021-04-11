@@ -19,7 +19,7 @@
 }
 
 .detail-layer:hover{
-    border: 1px solid blue;
+    border: 1px solid#0099FF;
 }
 
 .detail-layer-selected{
@@ -88,7 +88,7 @@
 
 .ruler{
     position: absolute;
-    border: 1px dotted blue;
+    border: .5px dashed#0099FF;
     left: 0;
     top:0;
 }
@@ -103,10 +103,35 @@
 }
 
 
-.inspector .item{
+.inspector{
+    display: flex;
+    flex-direction: column;
+}
 
+.inspector .item{
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    margin-bottom: 16px;
 }
 
 .inspector .item-title{
-    
+    width: 60px;
+    display: block;
+    flex: none;
+    color: rgb(110, 116, 125);
+    line-height: 30px;
+    white-space: nowrap;
+}
+
+.inspector .item-value{
+    flex: 1;
+    overflow: hidden;
+    background: #f4f7fd;
+    margin-left: 8px;
+    border-radius: 4px;
+    padding-left: 14px;
+    cursor: pointer;
+    line-height: 30px;
+    color: #0e1726;
 }

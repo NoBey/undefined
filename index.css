@@ -1,6 +1,7 @@
 html,body{
     height: 100%;
     width: 100%;
+    font-family: "PingFang SC", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Source Han Sans", "Noto Sans CJK Sc", "Microsoft YaHei", "Microsoft Jhenghei", sans-serif;
 }
 #app{
     height: 100%;
