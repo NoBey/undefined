@@ -1,10 +1,33 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import { useRouteMatch } from "react-router-dom";
-
+import { Drawer } from "antd";
 import { data } from "./data";
 
 import "./detail.css";
+
+function Inspector({ layer }) {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    setShow(!!layer);
+  }, [layer]);
+
+  const onClose = () => setShow(!show);
+  return (
+    <Drawer
+      title={layer && layer.name}
+      placement={"right"}
+      closable={true}
+      onClose={onClose}
+      visible={show}
+      mask={false}
+    >
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+    </Drawer>
+  );
+}
 
 function Detail(props) {
   let { params } = useRouteMatch("/detail/:id");
@@ -85,14 +108,14 @@ function Detail(props) {
   };
 
   const boxmouseout = () => {
-    setMoveLayer(null)
+    setMoveLayer(null);
     setDistances({
       top: null,
       right: null,
       bottom: null,
       left: null,
-    })
-  }
+    });
+  };
   console.log({ moveLayer, distances });
   return (
     <>
@@ -146,7 +169,7 @@ function Detail(props) {
               style={distances.top}
               className={"top-distance distance distance-vertical"}
             >
-              <span>{ parseInt(distances.top.height / zoom)}px</span>
+              <span>{parseInt(distances.top.height / zoom)}px</span>
             </div>
           )}
           {distances.right && (
@@ -176,14 +199,32 @@ function Detail(props) {
 
           {/* 标尺线 */}
 
-          {moveLayer && moveLayer.rect && <> 
-            <div className="top ruler ruler-horizontal" style={{top: moveLayer.rect.y * zoom}}></div>
-            <div className="left ruler ruler-vertical" style={{left: moveLayer.rect.x * zoom}}></div>
-            <div className="right ruler ruler-vertical" style={{left: (moveLayer.rect.x + moveLayer.rect.width) * zoom}}></div>
-            <div className="bottom ruler ruler-horizontal" style={{top: (moveLayer.rect.y + moveLayer.rect.height) * zoom}}></div>
-          </>}
-
+          {moveLayer && moveLayer.rect && (
+            <>
+              <div
+                className="top ruler ruler-horizontal"
+                style={{ top: moveLayer.rect.y * zoom }}
+              ></div>
+              <div
+                className="left ruler ruler-vertical"
+                style={{ left: moveLayer.rect.x * zoom }}
+              ></div>
+              <div
+                className="right ruler ruler-vertical"
+                style={{
+                  left: (moveLayer.rect.x + moveLayer.rect.width) * zoom,
+                }}
+              ></div>
+              <div
+                className="bottom ruler ruler-horizontal"
+                style={{
+                  top: (moveLayer.rect.y + moveLayer.rect.height) * zoom,
+                }}
+              ></div>
+            </>
+          )}
         </div>
+        <Inspector layer={selectLayer} />
       </div>
     </>
   );
