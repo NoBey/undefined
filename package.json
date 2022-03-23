@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack -w",
-    "build": "webpack"
+    "build": "publicPath='/undefined/' webpack"
   },
   "repository": {
     "type": "git",

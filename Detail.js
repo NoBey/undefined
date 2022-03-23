@@ -98,18 +98,20 @@ function Detail(props) {
 
   useEffect(() => {
     wrapRef.current.addEventListener("wheel", (e) => {
+      console.log(e)
       e.preventDefault();
       if (e.ctrlKey) {
         setZoom((zoom) => {
           let s = zoom - e.deltaY * 0.005;
-          if (s < 0.1) return 0.1;
-          if (s > 3) return 3;
+          if (s < 0.1) s = 0.1;
+          if (s > 3) s = 3;
           return s;
         });
+
       } else {
         setBoxStyle(({ top, left, ...s }) => ({
           ...s,
-          top: top - e.deltaY,
+          top: top - (e.deltaY / zoom),
           left: left - e.deltaX,
         }));
       }
@@ -164,7 +166,8 @@ function Detail(props) {
       left: null,
     });
   };
-  console.log({ moveLayer, distances });
+
+
   return (
     <>
       <div className={"detail-warp"} ref={wrapRef}>
@@ -172,7 +175,11 @@ function Detail(props) {
           className={"detail-box-wrap"}
           onMouseMove={boxmousemove}
           onMouseOut={boxmouseout}
-          style={boxStyle}
+          style={{
+            ...boxStyle,
+            left:  boxStyle.left * zoom,
+            top:  boxStyle.top * zoom
+          }}
         >
           {/* 选择的 layer */}
           {selectLayer && (
@@ -209,7 +216,7 @@ function Detail(props) {
             />
           ))}
 
-          <img draggable="false" src={"/" + info.imagePath} />
+          <img draggable="false" src={publicPath + info.imagePath} />
 
           {/* 测距  */}
           {distances.top && (

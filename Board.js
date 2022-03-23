@@ -81,10 +81,10 @@ function FreeBoard(props) {
             }}
           
             onDoubleClick={() => {
-              history.push("/detail/" + d.objectID);
+              history.push( "/detail/" + d.objectID);
             }}
           >
-            <img draggable="false" src={"/" + d.imagePath} />
+            <img draggable="false" src={publicPath + d.imagePath} />
           </div>
         ))}
       </div>
